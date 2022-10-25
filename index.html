@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Project 1</title>
+  </head>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+    .button {
+      background-color: Grey;
+      padding: 2px 20px;
+      margin: 10px 10px;
+      font-size: 20px;
+      margin-left: 10px;
+      margin-right: 30px;
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .header {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: rgb(24, 99, 197);
+      font-size: 20px;
+      align-items: right;
+    }
+
+    .tooltip {
+      position: absolute;
+    }
+
+    .row {
+      width: 90%;
+      height: 1200%;
+      display: flex;
+      flex: 50%;
+    }
+
+    #bar-chart {
+      width: 100%;
+      height: 100%;
+    }
+
+    .col {
+      width: 500%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #pie-chart {
+      height: 100%;
+      width: 100%;
+    }
+
+    #second-pie {
+      width: 100%;
+      height: 100%;
+    }
+    .line {
+      fill: none;
+      stroke:blue;
+      stroke-width: 1.5px;
+    }
+  </style>
+  
+  <body>
+    <div class="header">
+      <h1 style="float:center;font-size: 2em !important">Recreation of Dr. John Snow's Cholera Epidemic Map 1854</h1>
+    </div>
+    <div>
+      <div style="float: right">
+        <a href="video.html"><button class="button">Video</button></a>
+      </div>
+      <div style="float: right">
+        <a href="documentation.html"><button class="button">Documentation</button></a>
+      </div>
+    </div>
+    <div class="container">
+      <div id="chart-map"></div>
+      <div class="col">
+          <!-- <div id="bar-chart"></div> -->
+          <div class="row">
+              <div id="pie-chart"></div>
+              <div id="second-pie"></div>
+              <div id="presentation"></div>
+              <div><script>
+              var margin = {
+                top: 20,
+                right: 20, 
+                bottom: 30, 
+                left: 50
+              },
+              width = 600 - margin.left - margin.right,
+              height = 500 - margin.top - margin.bottom;
+            
+            var parseTime = d3
+              .timeParse("%d-%m");
+            var x = d3
+              .scaleTime().range([0, width]);
+            var y = d3
+              .scaleLinear().range([height, 0]);
+            var valueline = d3
+              .line()
+              .x(function(d) { return x(d.date); })
+              .y(function(d) { return y(d.deaths); });
+            
+            var svg = d3
+              .select("body").append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform",
+                      "translate(" + margin.left + "," + margin.top + ")");
+            
+            // Importing data csv
+            d3.csv("data.csv")
+              .then(function(data) {
+            
+              data.forEach(function(d) {
+                  d.date = parseTime(d.date);
+                  d.deaths = +d.deaths;
+              });
+            
+              x.domain(d3.extent(data, function(d) { return d.date; }));
+              y.domain([0, d3.max(data, function(d) { return d.deaths; })]);
+            
+              svg.append("path")
+                  .data([data])
+                  .attr("class", "line")
+                  .attr("d", valueline);
+            
+              svg.append("g")
+                  .attr("transform", "translate(0," + height + ")")
+                  .call(d3.axisBottom(x));
+            
+              svg.append("g")
+                  .call(d3.axisLeft(y));
+            });
+            </script></div>
+          </div>
+      </div>
+    </div>
+    <script src="map.js"></script> 
+    </body>
+</html>
