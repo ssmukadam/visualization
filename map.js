@@ -5,19 +5,19 @@ const drawChart = async () => {
   const pumps_data = await d3.csv("./data/pumps.csv");
   const streets_data = await d3.json("./data/streets.json");
 
-  d3.csv("/data/deathdays.csv", function(data) {
+  d3.csv("/data/deathdays.csv", function (data) {
     for (var i = 0; i < data.length; i++) {
-        console.log(data[i].date);
-        console.log(data[i].deaths);
+      console.log(data[i].date);
+      console.log(data[i].deaths);
     }
-});
+  });
 
   //Defined variables for map bar and pie chart
-  const margins = { 
+  const margins = {
     top: 50,
-    right: 20, 
-    bottom: 20, 
-    left: 20 
+    right: 20,
+    bottom: 20,
+    left: 20
   };
 
   let hoverValue = null;
@@ -46,7 +46,7 @@ const drawChart = async () => {
   const pieColors = d3
     .scaleOrdinal()
     .domain([0, 1, 2, 3, 4, 5])
-    .range(["Red","Blue","Green","Orange","Pink","Yellow"]);
+    .range(["Red", "Blue", "Green", "Orange", "Pink", "Yellow"]);
 
   const mapLegendColorScale = d3
     .scaleOrdinal()
@@ -98,7 +98,7 @@ const drawChart = async () => {
     .append("circle")
     .attr("cx", (d, i) => i * (dimensions.Map_Width / map_labels.length))
     .attr("cy", (d, i) => i * (dimensions.Map_Width / map_labels.length))
-    .attr("r",10)
+    .attr("r", 10)
     .attr("fill", (d) => mapLegendColorScale(d));
 
   mapLegend
@@ -125,7 +125,7 @@ const drawChart = async () => {
       .attr("stroke-width", 1)
       .attr("stroke", "black")
       .attr("fill", "none");
-      
+
   });
 
   // Adds a work-house circle in the map
@@ -160,12 +160,12 @@ const drawChart = async () => {
 
   // Adds the street name Brewer Street
   mapContainer
-  .append("text")
-  .style("fill", "Black")
-  .style("font-size", "15px")
-  .attr("text-anchor", "middle")
-  .attr("transform", "translate(450,400) rotate(-36)")
-  .text("BREWER STREET");
+    .append("text")
+    .style("fill", "Black")
+    .style("font-size", "15px")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(450,400) rotate(-36)")
+    .text("BREWER STREET");
 
   // Adds the street name Dean Street
   mapContainer
@@ -175,15 +175,15 @@ const drawChart = async () => {
     .attr("text-anchor", "middle")
     .attr("transform", "translate(655,200) rotate(60)")
     .text("DEAN STREET");
-    
+
   // Adds the street name Soho Square
   mapContainer
-  .append("text")
-  .style("fill", "Black")
-  .style("font-size", "15px")
-  .attr("text-anchor", "middle")
-  .attr("transform", "translate(620,100) rotate(-20)")
-  .text("SOHO SQUARE")
+    .append("text")
+    .style("fill", "Black")
+    .style("font-size", "15px")
+    .attr("text-anchor", "middle")
+    .attr("transform", "translate(620,100) rotate(-20)")
+    .text("SOHO SQUARE")
 
   //Adds the street name Recents Quadrant  
   mapContainer
@@ -249,8 +249,7 @@ const drawChart = async () => {
       tooltip.transition().duration(200).style("opacity", 1);
       tooltip
         .html(
-          `Age: ${ages(data.age)}<br/>Sex: ${
-            data.gender === "0" ? "Male" : "Female"
+          `Age: ${ages(data.age)}<br/>Sex: ${data.gender === "0" ? "Male" : "Female"
           }`
         )
         .style("left", `${event.pageX - 10}px`)
@@ -270,7 +269,7 @@ const drawChart = async () => {
       tooltip.transition().duration(500).style("opacity", 0);
     });
 
-  const pieSvgOne = d3              
+  const pieSvgOne = d3
     .select("#second-pie")
     .append("svg")
     .attr("width", dimensions.Pie_Width)
@@ -282,7 +281,7 @@ const drawChart = async () => {
     .attr("width", dimensions.Pie_Width)
     .attr("height", dimensions.Pie_Height);
 
-  const ageArcGroups = d3.group(deaths_age_sex_data, (d) => +d.age);
+  const ageArcGroups = d3.sort(d3.group(deaths_age_sex_data, (d) => +d.age), (d) => +d[0]);
   const sexArcGroup = d3.group(deaths_age_sex_data, (d) => +d.gender);
 
   const ageGroupContainer = pieSvgOne
@@ -325,7 +324,7 @@ const drawChart = async () => {
   const ageArcs = ageGroupContainer
     .selectAll(".arcs")
     .data(pie(ageArcGroups))
-    .enter() 
+    .enter()
     .append("g")
     .attr("class", "arcs");
 
@@ -346,10 +345,9 @@ const drawChart = async () => {
       tooltip.transition().duration(200).style("opacity", 1);
       tooltip
         .html(
-          `Age Range: ${ages(data.data[0])}<br/>Percentage: ${
-            (data.data[1].length / deaths_age_sex_data.length).toFixed(2) *
-              100 +
-            "%"
+          `Age Range: ${ages(data.data[0])}<br/>Percentage: ${(data.data[1].length / deaths_age_sex_data.length).toFixed(2) *
+          100 +
+          "%"
           }<br>No. of Deaths: ${data.data[1].length}`
         )
         .style("left", `${event.pageX - 10}px`)
@@ -420,8 +418,7 @@ const drawChart = async () => {
       tooltip.transition().duration(200).style("opacity", 1);
       tooltip
         .html(
-          `Sex: ${data.data[0] === 0 ? "Male" : "Female"}<br/>Deaths: ${
-            data.data[1].length
+          `Sex: ${data.data[0] === 0 ? "Male" : "Female"}<br/>Deaths: ${data.data[1].length
           }`
         )
         // .style("left", `${event.pageX - 10}px`)
@@ -446,7 +443,7 @@ const drawChart = async () => {
     });
 
   sexArcs
-  //Appending the text horizontally
+    //Appending the text horizontally
     .append("text")
     .attr(
       "transform",
@@ -474,7 +471,7 @@ const drawChart = async () => {
     )
     .style("pointer-events", "none");
 
-//timeline graph
+  //timeline graph
 
 };
 
