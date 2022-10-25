@@ -352,11 +352,9 @@ const drawChart = async () => {
         )
         .style("left", `${event.pageX - 10}px`)
         .style("top", `${event.pageY - 10}px`)
-        .style("border", "1px solid #8A0100")
-        .style("background-color", "Black")
-        .style("color", "Black")
-        .style("border-radius", "5px")
-        .style("padding", "5px");
+        .style("border", "1 px solid black")
+        .style("background-color", "White")
+        .style("border-radius", "2px")
     })
     .on("mousemove", function (event, data) {
       tooltip
@@ -436,8 +434,6 @@ const drawChart = async () => {
     .on("mouseout", function (event) {
       hoverValue = "";
       d3.selectAll(".age-sex-circle")
-        // .transition()
-        // .duration(100)
         .attr("opacity", 1);
       tooltip.transition().duration(500).style("opacity", 0);
     });

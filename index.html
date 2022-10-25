@@ -91,16 +91,15 @@
     </div>
     <div>
       <div style="float: right">
-        <a href="video.html"><button class="button">Video</button></a>
+        <a href="Video.html"><button class="button">Video</button></a>
       </div>
       <div style="float: right">
-        <a href="documentation.html"><button class="button">Documentation</button></a>
+        <a href="Document.html"><button class="button">Documentation</button></a>
       </div>
     </div>
     <div class="container">
       <div id="chart-map"></div>
-      <div class="col">
-          <!-- <div id="bar-chart"></div> -->
+      <div class="col"></div>
           <div class="row">
               <div id="pie-chart"></div>
               <div id="second-pie"></div>
@@ -110,17 +109,16 @@
                 top: 20,
                 right: 20, 
                 bottom: 30, 
-                left: 50
+                left: 50,
               },
               width = 600 - margin.left - margin.right,
-              height = 500 - margin.top - margin.bottom;
-            
-            var parseTime = d3
-              .timeParse("%d-%m");
-            var x = d3
-              .scaleTime().range([0, width]);
-            var y = d3
-              .scaleLinear().range([height, 0]);
+                height = 500 - margin.top - margin.bottom;
+                          
+            var parseTime = d3.timeParse("%d-%m");
+            var x = d3.scaleTime()
+              .range([0, width]);
+            var y = d3.scaleLinear()
+              .range([height, 0]);
             var valueline = d3
               .line()
               .x(function(d) { return x(d.date); })
@@ -135,7 +133,7 @@
                       "translate(" + margin.left + "," + margin.top + ")");
             
             // Importing data csv
-            d3.csv("data.csv")
+            d3.csv("data/data.csv")
               .then(function(data) {
             
               data.forEach(function(d) {
