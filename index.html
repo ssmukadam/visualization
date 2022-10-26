@@ -1,165 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <title>Project 1</title>
-  </head>
-  <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
 
-    .button {
-      background-color: Grey;
-      padding: 2px 20px;
-      margin: 10px 10px;
-      font-size: 20px;
-      margin-left: 10px;
-      margin-right: 30px;
-    }
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <title>Project 1</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    .container {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      overflow: hidden;
-      padding: 20px;
-    }
+  .button {
+    background-color: Grey;
+    padding: 2px 20px;
+    margin: 10px 10px;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 30px;
+  }
 
-    .header {
-      width: 100%;
-      height: 70px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  .container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    padding: 20px;
+  }
 
-    a {
-      text-decoration: none;
-      color: rgb(24, 99, 197);
-      font-size: 20px;
-      align-items: right;
-    }
+  .header {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .tooltip {
-      position: absolute;
-    }
+  a {
+    text-decoration: none;
+    color: rgb(24, 99, 197);
+    font-size: 20px;
+    align-items: right;
+  }
 
-    .row {
-      width: 90%;
-      height: 1200%;
-      display: flex;
-      flex: 50%;
-    }
+  .tooltip {
+    position: absolute;
+  }
 
-    #bar-chart {
-      width: 100%;
-      height: 100%;
-    }
+  .row {
+    width: 90%;
+    height: 1200%;
+    display: flex;
+    flex: 50%;
+  }
 
-    .col {
-      width: 500%;
-      height: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+  #bar-chart {
+    width: 100%;
+    height: 100%;
+  }
 
-    #pie-chart {
-      height: 100%;
-      width: 100%;
-    }
+  .col {
+    /* width: 500%; */
+    /* height: 50%; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+  }
 
-    #second-pie {
-      width: 100%;
-      height: 100%;
-    }
-    .line {
-      fill: none;
-      stroke:blue;
-      stroke-width: 1.5px;
-    }
-  </style>
+  #pie-chart {
+    height: 100%;
+    width: 100%;
+  }
+
+  #second-pie {
+    width: 100%;
+    height: 100%;
+  }
+
+  .line {
+    fill: none;
+    stroke: blue;
+    stroke-width: 1.5px;
+  }
+</style>
+
+<body>
+  <div class="header">
+    <h1 style="float:center;font-size: 2em !important">Dr. John Snow's Cholera Epidemic Map 1854</h1>
+    
   
-  <body>
-    <div class="header">
-      <h1 style="float:center;font-size: 2em !important">Recreation of Dr. John Snow's Cholera Epidemic Map 1854</h1>
+    <br>
+  </div>
+  <div class="row">
+  
+  <h2 style=" margin-top: 50px;">Soho Map with Victims and Pump Locations Plotted &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;                 &nbsp;  Timeline graph representing deaths over time</h2>
+  </div>
+  <div>
+    <div style="float: right">
+      <a href="Video.html"><button class="button">Video</button></a>
     </div>
-    <div>
-      <div style="float: right">
-        <a href="Video.html"><button class="button">Video</button></a>
-      </div>
-      <div style="float: right">
-        <a href="Document.html"><button class="button">Documentation</button></a>
-      </div>
+    <div style="float: right">
+      <a href="Document.html"><button class="button">Documentation</button></a>
     </div>
-    <div class="container">
-      <div id="chart-map"></div>
-      <div class="col"></div>
-          <div class="row">
-              <div id="pie-chart"></div>
-              <div id="second-pie"></div>
-              <div id="presentation"></div>
-              <div><script>
-              var margin = {
-                top: 20,
-                right: 20, 
-                bottom: 30, 
-                left: 50,
-              },
-              width = 600 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-                          
-            var parseTime = d3.timeParse("%d-%m");
-            var x = d3.scaleTime()
-              .range([0, width]);
-            var y = d3.scaleLinear()
-              .range([height, 0]);
-            var valueline = d3
-              .line()
-              .x(function(d) { return x(d.date); })
-              .y(function(d) { return y(d.deaths); });
-            
-            var svg = d3
-              .select("body").append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform",
-                      "translate(" + margin.left + "," + margin.top + ")");
-            
-            // Importing data csv
-            d3.csv("data/data.csv")
-              .then(function(data) {
-            
-              data.forEach(function(d) {
-                  d.date = parseTime(d.date);
-                  d.deaths = +d.deaths;
-              });
-            
-              x.domain(d3.extent(data, function(d) { return d.date; }));
-              y.domain([0, d3.max(data, function(d) { return d.deaths; })]);
-            
-              svg.append("path")
-                  .data([data])
-                  .attr("class", "line")
-                  .attr("d", valueline);
-            
-              svg.append("g")
-                  .attr("transform", "translate(0," + height + ")")
-                  .call(d3.axisBottom(x));
-            
-              svg.append("g")
-                  .call(d3.axisLeft(y));
-            });
-            </script></div>
-          </div>
+  </div>
+  <div class="container">
+    <div id="chart-map"></div>
+    <div class="col">
+      <div class="row">
+        <div id="presentation"></div>
+      </div>
+      <div class="row">
+        <div id="pie-chart"></div>
+        <div id="second-pie"></div>
       </div>
     </div>
-    <script src="map.js"></script> 
-    </body>
+  </div>
+  
+  </div>
+  <script src="map.js"></script>
+
+  <script>
+    
+    margin = {
+      top: 20,
+      right: 20,
+      bottom: 30,
+      left: 50,
+    },
+      width = 600 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+    parseTime = d3.timeParse("%d-%m");
+    x = d3.scaleTime()
+      .range([0, width]);
+    y = d3.scaleLinear()
+      .range([height, 0]);
+    valueline = d3
+      .line()
+      .x(function (d) { return x(d.date); })
+      .y(function (d) { return y(d.deaths); });
+
+    svg = d3
+      .select("#presentation").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+    // Importing data csv
+    d3.csv("data/data.csv")
+      .then(function (data) {
+
+        data.forEach((d) => {
+          d.date = parseTime(d.date);
+          d.deaths = +d.deaths;
+        });
+
+        x.domain(d3.extent(data, function (d) { return d.date; }));
+        y.domain([0, d3.max(data, function (d) { return d.deaths; })]);
+
+        svg.append("path")
+          .data([data])
+          .attr("class", "line")
+          .attr("d", valueline);
+
+        svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+
+        svg.append("g")
+          .call(d3.axisLeft(y));
+
+        svg.selectAll("circles")
+          .data(data)
+          .enter()
+          .append("circle")
+          .attr("fill", "blue")
+          .attr("cx", (d) => x(d.date))
+          .attr("cy", (d) => y(d.deaths))
+          .attr("r", (d) => d.deaths === 0 ? 0 : 3)
+      });
+     
+  </script>
+</body>
+
 </html>

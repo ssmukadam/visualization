@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Project Documentation </title>
+		<title>Project Documentation</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -9,7 +9,7 @@
 	<body>
         <header>
             <div style="width:800px; margin: auto; margin-top:25px;">
-              <h2>Recreation of Dr. John Snow's Cholera Epidemic Map</h2>
+              <h2><b><i>Dr. John Snow's Cholera Epidemic Map</i></b></h2>
             </div>
             <div>
                 <div style="margin-left: 1000px;">
@@ -19,41 +19,35 @@
             </div>
         </header>
 		<br>
-		<div style="margin: 35px">
-			<h4>Introduction:</h4>
-			<p></p>
-			<h4>Design for Cholera Map Visualization:</h4>
-            <div style="margin-left: 30px">
-                <ul>
-                    <li style="margin-left: ;">In this project, Firstly, I have gone through the requirements of the project and gonethrough the the given datasets i.e. streets, pumps, deathdays and deathagessex files.</li>
-                    <li>Next I made a analysis on how to draw all the graphs and how to start it. Took a overlook on the John Snow's map.</li>
-                    <li>I used Visualization studio code and started uploading the packages and files. First I took the streets.json file and plotted the lines and displayed pumps from the pumps file, and plotted the deaths based on the gender and coordinates as given in the deaths_age_sex file, followed by streets names, warehouses and brewery.</li>
-                    <li>By hovering on the timeline graph, we can see the number of deaths occurred on the particular dates on the map.</li>
-                    <li>The first pie-chart shows the no. of deaths by age group. You can see the age groups, death percentage and number of deaths.</li>
-                    <li>The second pie-chart shows the number of deaths by sex i.e., Male and Female.</li>
-                    <li>Then analyzed the valuable information from datasets.</li>
-                </ul>
+		
+			<div>
+			<h4><b><i>Introduction</b></i></h4>
+			</div>
+		<div style="margin: 20px">
+			<p>Dr. John Snow's map is a visual representation of cholera epidemic from the 19th century, this outbreak caused large-scale transmission of the disease. John Snow discovered Cholera disease when he investigated a spread in the Soho district of London.
+			 Theory believed that the disease was transmitted or spread by bad air, John snow was the one who knew that cholera was transmitted throught the contaminated water. In 1854 the physician made a huge contribution in fighting cholera and was able to demonstrate how the contaminated public water pump was causing cholera in that region. He made great contributions which led to some positive changes as the water pumps used for drinking were disables, decrease in the number of deaths.</p>
+			<h4><b><i>Design Process</i></b></h4>
+            <div style="margin-left: 20px">
+                    <p>I was excited to recreate Dr. John Snow's cholera map visualization. The very first step in visualization is analyzing the given data, I went through the data files to check and understand the type of data columns, JSON file which describes the paths for the map. I started by working on the map using JSON file where I successfully created the map lines for the paths from the given data.<br>
+                    By referring to websites and reading the D3 book I understood the concepts of creating the different types of graphs such as the line chart, bar graphs and the pie charts.
+                    Cholera Epidemic map of london was recreated by importing the csv data file and json file to first draw the street lines of the map. After creating the street lines I focused on naming streets and positioning the work-house circle, brewery and the pumps into the map.<br>
+                    Implemented the visual encoding hovering on the timeline graph, we can see the number of deaths occurred on the particular dates on the map.<br>
             </div>
-			<img src="image.jpeg" alt="Fig: Designfig1" style="width: 500px;height: 450px;">
-			<h4>Design Choices:</h4>
+			<h4><b><i>Design Choices</i></b></h4>
 			<ul>
-				<p>In the beginning, I started doing sketches on the paper for the visualization by taking the datasets and their measures into consideration. There are correlations of the datasets. After understanding the datasets and their data, I tried to present my data in such a way that a person can easily lead a investigation on the cholera epidemic. Initial Visualization has a map, which has streets and pumps, locations of the deaths. I have used pie chart and timeline graph to analyze the correct amount of the deaths occurred in that area. You can also see the number of deaths occurred on a specific date. The brown color represents the London streets and yellow color represents the pumps in that area. Also mentioned age groups in different colors. I’ve also added Zoom-in and Zoom-out functions to the map. For the other pie chart, I have used two colors Maroon and Purple for Male and Female respectively.</p>
+				<p> I started by thinking</p>
+				<img >
 			</ul>
-			<h4>Observations:</h4>
+			<h4><b><i>Observations</i></b></h4>
 			<ul>
 				<p>By observing the map, we can see that females are more affected than the male. By hovering on the first pie chart, user can be able to see the number of deaths by age group. we can see in the visualization that age group from 0 to 10 and age group greater than >80 is more affected by this incident than other age groups.
 					Third, Timeline Graph which shows the death dates and number of the deaths occurred on that date. You can observe high death rate occurred in between 9th August and 10th September. Also, the highest death occurred is on 1st September.
 					Then I have added the pie-charts where the user can have a clear percentage of deaths by Age group and Sex.
 					</p>
 			</ul>
-      <h4> Framework & Tools:</h4>
-      <li style="margin-left: ;">D3.js</li>
-      <li>HTML</li>
-      <li>CSS</li>
-      <li>javascript</li>
-			<h4>References:</h4>
-			<div style="margin-left: 30px">
-				<ul>
+     
+			<h4><b><i>References</i></b></h4>
+			<div>
 					<li><a href="https://d3-graph-gallery.com/graph/interactivity_tooltip.html">https://d3-graph-gallery.com/graph/interactivity_tooltip.html</a></li>
 					<li><a href="https://www.w3schools.com/w3css/">https://www.w3schools.com/w3css/</a></li>
 					<li><a href="https://javascript.plainenglish.io/react-leaflet-v3-creating-a-mapping-application-d5477f19bdeb">https://javascript.plainenglish.io/react-leaflet-v3-creating-a-mapping-application-d5477f19bdeb</a></li>
@@ -64,7 +58,6 @@
 					<li><a href="https://www.d3-graph-gallery.com">https://www.d3-graph-gallery.com</a></li>
 					<li><a href="https://www.w3schools.com/w3js/">https://www.w3schools.com/w3js/</a></li>
 					<li><a href="https://cs205uiuc.github.io/guidebook/d3/shapes.html#:~:text=A%20rectangle%20in%20d3%20is,square%20or%20rectangle%2Dbased%20visualization.">https://cs205uiuc.github.io/guidebook/d3/shapes.html#:~:text=A%20rectangle%20in%20d3%20is,square%20or%20rectangle%2Dbased%20visualization.</a></li>
-				</ul>
 			</div>	
 		</div>
 	</body>

@@ -51,7 +51,8 @@ const drawChart = async () => {
   const mapLegendColorScale = d3
     .scaleOrdinal()
     .domain(map_labels)
-    .range(["Blue", "Orange"]);
+    .range(["Blue", "Orange", "Green", "Red", "purple", "Yellow"]);
+    // .range(["Blue", "Orange"]);
 
   const svg = d3
     .select("#chart-map")
@@ -96,9 +97,9 @@ const drawChart = async () => {
     .data(map_labels)
     .enter()
     .append("circle")
+    .attr("class", "test")
     .attr("cx", (d, i) => i * (dimensions.Map_Width / map_labels.length))
-    .attr("cy", (d, i) => i * (dimensions.Map_Width / map_labels.length))
-    .attr("r", 10)
+    .attr("r", 6)
     .attr("fill", (d) => mapLegendColorScale(d));
 
   mapLegend
@@ -107,7 +108,7 @@ const drawChart = async () => {
     .enter()
     .append("text")
     .attr("x", (d, i) => 15 + i * (dimensions.Map_Width / map_labels.length))
-    .attr("y", 0)
+    // .attr("y", 0)
     .attr("dy", "0.35em")
     .attr("text-anchor", "start")
     .text((d) => d);
@@ -123,7 +124,8 @@ const drawChart = async () => {
       .append("path")
       .attr("d", mapLines(street))
       .attr("stroke-width", 1)
-      .attr("stroke", "black")
+      .attr("stroke",
+       "black")
       .attr("fill", "none");
 
   });
@@ -132,10 +134,10 @@ const drawChart = async () => {
   mapContainer
     .append("circle")
     .attr("class", "work-house-circle")
-    .attr("cx", 150)
-    .attr("cy", 200)
-    .attr("r", "10px")
-    .attr("fill", "Black")
+    .attr("cx", 350)
+    .attr("cy", 185)
+    .attr("r", 10)
+    .attr("fill", mapLegendColorScale("Work House"))   
     .attr("stroke", "none")
     .style("pointer-event", "none");
 
@@ -143,10 +145,10 @@ const drawChart = async () => {
   mapContainer
     .append("circle")
     .attr("class", "brewery-circle")
-    .attr("cx", 300)
-    .attr("cy", 500)
-    .attr("r", "10px")
-    .attr("fill", "Grey")
+    .attr("cx", 445)
+    .attr("cy", 240)
+    .attr("r", 10)
+    .attr("fill", mapLegendColorScale("Brewery"))
     .attr("stroke", "none")
     .style("pointer-event", "none");
 
