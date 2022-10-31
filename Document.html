@@ -29,18 +29,26 @@
                 <p>I was excited to recreate Dr. John Snow's cholera map visualization. The very first step in visualization is analyzing the given data, I went through the data files to check and understand the type of data columns, JSON file which describes the paths for the map. I started by working on the map using JSON file where I successfully created the map lines for the paths from the given data.<br>
                 By referring to websites and reading the D3 book I understood the concepts of creating the different types of graphs such as the line chart, bar graphs and the pie charts.
                 Cholera Epidemic map of london was recreated by importing the csv data file and json file to first draw the street lines of the map. After creating the street lines I focused on naming streets and positioning the work-house circle, brewery and the pumps into the map.<br>
-                Implemented the visual encoding hovering on the timeline graph, we can see the number of deaths occurred on the particular dates on the map.<br>
+                Implemented the visual encoding hovering on the timeline graph, we can see the number of deaths occurred on the particular dates on the map.
+				I created two pie charts, one of which depicts the percenatge ratio of people affected by cholera based on the sex, another pie chart depicts different type of age groups which is affected by the disease.
+				<br>
             </div>
 			<h4><b><i>Design Choices</i></b></h4>
 				<p>I started by designing and thinking about how can I display the soho map and the graphs required. I drew some UI designs by hand to get an overview about how will I be able to fit the maps and the graphs on the screen without a need to scroll down the page.
 				By importing the dataset and starting to map the street lines of it, I tried to align the map on the left corner of the page so that other graphs would fit besides it.
 				Implementing the map exactly the way it should look was a task and I had to keep debugging the code many a times to make it look good and interpret the results properly.
+				I struggled on giving both the pie charts a way to communicate with the Soho map using the tooltip. Aligning all the graphs in a way that I had designed was also a task for me. I was not able to fit the pie charts on the same page,
+				they had to be scrolled down to see the whole graph.
 				</p>
 				<img src="Image1.jpeg" width="300" height="280">
 				<img src="Image2.jpeg" width="300" height="280">
 			<h4><b><i>Observations</i></b></h4>
 				<p>The Map gives us an overview about how the females are affected more as compared to the ratio of males. 
 				It also gives the description about the persons affected by cholera and a specific region around the broad street is highly infected by it.
+				The most affected age group is above 80 and most affected sex is female. The timeline graph shows a spike in number of deaths from 1st Sept-2nd Sept, this is 
+				rapid increase in count of people on the marked day.
+				The pie chart shows that the percentage of male and female affected by cholera epidemic is both 50%, it is likely that
+				female is a bit more but that ratio is very negligible.
 				</p>
 
 			<h4><b><i>References</i></b></h4>
